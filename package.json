@@ -1,0 +1,39 @@
+{
+  "name": "@pjblog/cli",
+  "version": "2.3.0",
+  "description": "PJBlog博客命令行工具工程",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "pjblog": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf ./dist && tsc -d && fix-esm-import-path --preserve-import-type ./dist",
+    "dev": "node --loader ts-node/esm ./src/index.ts",
+    "pub": "npm run build && git add . && git commit -am 'update' && git push",
+    "banner": "node scripts/banner.cjs"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/npmlog": "^7.0.0",
+    "fix-esm-import-path": "^1.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@pjblog/blog": "^2.3.1",
+    "@zille/configurator": "^1.1.2",
+    "@zille/ioredis": "^1.1.2",
+    "@zille/service": "^1.1.2",
+    "@zille/typeorm": "^1.1.2",
+    "commander": "^12.0.0",
+    "dayjs": "^1.11.10",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.16",
+    "npmlog": "^7.0.1"
+  }
+}
