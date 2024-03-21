@@ -58,7 +58,7 @@ export class BlogSetup extends Service {
 
   public readonly rollbacks: (() => void | Promise<void>)[] = []
 
-  public async main(dir?: string) {
+  public async connect(dir?: string) {
     const cwd = process.cwd();
     const directory = dir ? resolve(cwd, dir) : cwd;
     const prompt = createPromptModule();
@@ -156,7 +156,7 @@ export class BlogSetup extends Service {
     return manifest;
   }
 
-  public async destroy() {
+  public async disconnect() {
     for (let i = 0; i < this.rollbacks.length; i++) {
       await Promise.resolve(this.rollbacks[i]());
     }
