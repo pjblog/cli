@@ -1,6 +1,6 @@
 {
   "name": "@pjblog/cli",
-  "version": "2.3.1",
+  "version": "2.3.3",
   "description": "PJBlog博客命令行工具工程",
   "license": "MIT",
   "type": "module",
@@ -25,7 +25,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "@pjblog/blog": "^2.3.34",
+    "@pjblog/blog": "^2.3.35",
     "@zille/configurator": "^1.1.2",
     "@zille/ioredis": "^1.1.2",
     "@zille/service": "^1.1.2",
