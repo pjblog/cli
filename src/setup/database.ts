@@ -23,9 +23,9 @@ export class BlogDataBaseQuestion extends Service implements QuestionServiceImpl
         default: value.type,
         choices: [
           { name: 'MySQL', value: 'mysql' },
-          { name: 'MsSQL', value: 'mssql' },
-          { name: 'Oracle', value: 'oracle' },
-          { name: 'PostGres', value: 'postgres' }
+          { name: 'MsSQL', value: 'mssql', disabled: true },
+          { name: 'Oracle', value: 'oracle', disabled: true },
+          { name: 'PostGres', value: 'postgres', disabled: true }
         ]
       },
       {
