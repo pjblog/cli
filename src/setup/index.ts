@@ -89,8 +89,8 @@ export class BlogSetup extends Service {
         description,
         blog: configs,
         scripts: {
-          'start': 'node index.js',
-          'pm2:start': 'pm2 start index.js --name=pjblog',
+          'start': 'node index.mjs',
+          'pm2:start': 'pm2 start index.mjs --name=pjblog',
           'pm2:stop': 'pm2 stop pjblog',
           'pm2:restart': 'pm2 restart pjblog',
         },
@@ -148,8 +148,8 @@ export class BlogSetup extends Service {
     const cache = await this.$use(Storage);
     this.rollbacks.push(() => cache.connection.close());
 
-    const portProps = await prompt(this.BlogHttpPortQuestion.ask({ value: configs.http.port }));
-    configs.http.port = portProps.value;
+    const portProps = await prompt(this.BlogHttpPortQuestion.ask({ value: configs.http.port.toString() }));
+    configs.http.port = Number(portProps.value) || 3000;
 
     const admin = await prompt(this.BlogAdminQuestion.ask({ account: 'admin', password: 'Admin_888' }));
 
@@ -165,9 +165,9 @@ export class BlogSetup extends Service {
     const bootstrapFile = resolve(__dirname, '../bootstrap.js');
     if (existsSync(bootstrapFile)) {
       const source = bootstrapFile;
-      const target = resolve(cwd, 'index.js');
+      const target = resolve(cwd, 'index.mjs');
       await copy(source, target, { overwrite: true });
-      console.log('+', 'index.js');
+      console.log('+', 'index.mjs');
     }
 
     writeFileSync(blogPackageJsonFilePath, JSON.stringify(manifest, null, 2), 'utf8');

@@ -1,6 +1,6 @@
 {
   "name": "@pjblog/cli",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "description": "PJBlog博客命令行工具工程",
   "license": "MIT",
   "type": "module",

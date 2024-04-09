@@ -3,7 +3,7 @@ import { QuestionCollection } from 'inquirer';
 import { QuestionServiceImplements } from './types';
 
 interface BlogHttpPortProps {
-  value: number,
+  value: string,
 }
 
 @Service.Injectable()
@@ -18,9 +18,6 @@ export class BlogHttpPortQuestion extends Service implements QuestionServiceImpl
         validate(val: string) {
           if (!val) return '请输入端口';
           return true;
-        },
-        transformer(val: string) {
-          return Number(val);
         }
       }
     ]
