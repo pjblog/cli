@@ -1,5 +1,4 @@
 import fs from 'fs-extra';
-import { glob } from 'glob';
 import { copy } from 'fs-extra';
 import { Service } from '@zille/service';
 import { resolve } from 'node:path';
@@ -102,7 +101,7 @@ export class BlogSetup extends Service {
           'pm2': '^5.3.1'
         }
       }
-      writeFileSync(blogPackageJsonFilePath, JSON.stringify(pkg), 'utf8');
+      writeFileSync(blogPackageJsonFilePath, JSON.stringify(pkg, null, 2), 'utf8');
     }
 
     configs.database = await prompt(this.BlogDataBaseQuestion.ask(configs.database));
@@ -163,9 +162,9 @@ export class BlogSetup extends Service {
       blog: configs,
     }
 
-    const bootstraps = await glob('bootstrap.js', { cwd: resolve(__dirname, '..') });
-    if (bootstraps.length) {
-      const source = bootstraps[0];
+    const bootstrapFile = resolve(__dirname, '../bootstrap.js');
+    if (existsSync(bootstrapFile)) {
+      const source = bootstrapFile;
       const target = resolve(cwd, 'index.js');
       await copy(source, target, { overwrite: true });
       console.log('+', 'index.js');
