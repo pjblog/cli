@@ -3,7 +3,6 @@
 import { createRequire } from 'node:module';
 import { Command } from 'commander';
 import { BlogSetup } from './setup/index';
-import { BlogStart } from './start';
 import { createContext } from '@zille/service';
 import { logger } from './logger';
 
@@ -26,11 +25,6 @@ program
     await blog.disconnect();
     logger.info(`+ PJBlog@${manifest.version}`);
   }))
-
-program
-  .command('start [file]')
-  .description('启动服务')
-  .action(tryCatch(BlogStart));
 
 program.parseAsync();
 

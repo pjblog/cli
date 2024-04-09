@@ -1,6 +1,6 @@
 {
   "name": "@pjblog/cli",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "PJBlog博客命令行工具工程",
   "license": "MIT",
   "type": "module",
@@ -25,14 +25,15 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@pjblog/blog": "^2.3.36",
+    "@pjblog/blog": "^2.3.38",
     "@zille/configurator": "^1.1.2",
     "@zille/ioredis": "^1.1.2",
     "@zille/service": "^1.1.2",
-    "@zille/typeorm": "^1.1.2",
+    "@zille/typeorm": "^1.1.14",
     "commander": "^12.0.0",
     "dayjs": "^1.11.10",
     "fs-extra": "^11.2.0",
+    "glob": "^10.3.12",
     "inquirer": "^9.2.17",
     "npmlog": "^7.0.1"
   }

@@ -1,6 +1,9 @@
 import fs from 'fs-extra';
+import { glob } from 'glob';
+import { copy } from 'fs-extra';
 import { Service } from '@zille/service';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createPromptModule } from 'inquirer';
 import { BlogDataBaseQuestion } from './database';
 import { existsSync, writeFileSync } from 'node:fs';
@@ -29,6 +32,7 @@ import {
 
 const { ensureDir } = fs;
 const require = createRequire(import.meta.url);
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 @Service.Injectable()
 export class BlogSetup extends Service {
@@ -85,9 +89,17 @@ export class BlogSetup extends Service {
         version,
         description,
         blog: configs,
+        scripts: {
+          'start': 'node index.js',
+          'pm2:start': 'pm2 start index.js --name=pjblog',
+          'pm2:stop': 'pm2 stop pjblog',
+          'pm2:restart': 'pm2 restart pjblog',
+        },
         dependencies: {
           '@pjblog/blog': '^' + version,
           'pjblog-theme-default': '^2.3.0',
+          'mysql2': '^3.6.1',
+          'pm2': '^5.3.1'
         }
       }
       writeFileSync(blogPackageJsonFilePath, JSON.stringify(pkg), 'utf8');
@@ -151,7 +163,16 @@ export class BlogSetup extends Service {
       blog: configs,
     }
 
+    const bootstraps = await glob('bootstrap.js', { cwd: resolve(__dirname, '..') });
+    if (bootstraps.length) {
+      const source = bootstraps[0];
+      const target = resolve(cwd, 'index.js');
+      await copy(source, target, { overwrite: true });
+      console.log('+', 'index.js');
+    }
+
     writeFileSync(blogPackageJsonFilePath, JSON.stringify(manifest, null, 2), 'utf8');
+    console.log('+', 'package.json');
 
     return manifest;
   }
