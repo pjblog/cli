@@ -1,6 +1,6 @@
 {
   "name": "@pjblog/cli",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "PJBlog博客命令行工具工程",
   "license": "MIT",
   "type": "module",
@@ -22,10 +22,10 @@
     "@types/npmlog": "^7.0.0",
     "fix-esm-import-path": "^1.5.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@pjblog/blog": "^2.3.35",
+    "@pjblog/blog": "^2.3.36",
     "@zille/configurator": "^1.1.2",
     "@zille/ioredis": "^1.1.2",
     "@zille/service": "^1.1.2",
